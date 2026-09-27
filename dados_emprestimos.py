@@ -1,23 +1,12 @@
 import sqlite3
 
-#conectando o banco de dados. Caso não exista, o banco é criado.
-conn = sqlite3.connect("biblioteca.db")
+def insert_emprestimo (usuario_id, data):
+    conn = sqlite3.connect("biblioteca.db")
+    cursor = conn.cursor()
 
-#apaga a tabela livros
-conn.execute("DROP TABLE IF EXISTS emprestimos")
+    insert_sql = "INSERT INTO emprestimos (usuario_id, data) VALUES (?,?)"
 
-#cria a tabela emprestimos
-sql_create = """
-    CREATE TABLE emprestimos (id INTEGER PRIMARY KEY AUTOINCREMENT,
-        usuario_id INTEGER REFERENCES usuarios(id),
-        data DATE DEFAULT CURRENT_DATE)
-"""
-conn.execute(sql_create)
+    cursor.execute(insert_sql, (usuario_id, data))
 
-#insere registro na tabela
-sql_insert = """
-    INSERT INTO emprestimos (usuario_id) VALUES (1)
-"""
-
-conn.execute(sql_insert)
-conn.commit()
+    conn.commit()
+    conn.close()

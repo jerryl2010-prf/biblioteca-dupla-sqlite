@@ -1,18 +1,12 @@
 import sqlite3
 
-#conectando o banco de dados. Caso não exista, o banco é criado.
-conn = sqlite3.connect("biblioteca.db")
+def insert_editora (nome):
+    conn = sqlite3.connect("biblioteca.db")
+    cursor = conn.cursor()
 
-#apaga a tabela editoras
-conn.execute("DROP TABLE IF EXISTS editoras")
+    insert_sql = "INSERT INTO editoras (nome) VALUES (?)"
 
-#cria a tabela editoras
-conn.execute("CREATE TABLE editoras (id INTEGER PRIMARY KEY AUTOINCREMENT \
-             , nome TEXT NOT NULL)")
+    cursor.execute(insert_sql, (nome,))
 
-#inserindo os registros na tabela editoras
-conn.executemany("INSERT INTO editoras(nome) VALUES(?)",
-                 [("Moderna",), ("Nova",)])
-
-#confirmando a criação e os inserts da tabela editoras.
-conn.commit()
+    conn.commit()
+    conn.close()
