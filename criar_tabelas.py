@@ -69,7 +69,7 @@ def create_emprestimos():
     CREATE TABLE IF NOT EXISTS emprestimos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         usuario_id INTEGER REFERENCES usuarios(id),
-        data DATE DEFAULT CURRENT DATE
+        data DATE DEFAULT CURRENT_DATE
     )
     """)
 
