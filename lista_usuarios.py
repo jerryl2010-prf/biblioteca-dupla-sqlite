@@ -1,8 +1,8 @@
-import sqlite3 as sqlite
+import sqlite3
 
 #abre a conexão com o banco
-conn = sqlite.connect("biblioteca.db")
-conn.row_factory = sqlite.Row
+conn = sqlite3.connect("biblioteca.db")
+conn.row_factory = sqlite3.Row
 
 #cria um cursor (objeto para interagir com o banco)
 cursor = conn.cursor()
