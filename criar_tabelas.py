@@ -68,7 +68,7 @@ def create_emprestimos():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS emprestimos (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        usuario_id INTEGER REFERENCES usuario(id),
+        usuario_id INTEGER REFERENCES usuarios(id),
         data DATE DEFAULT CURRENT DATE
     )
     """)
@@ -82,9 +82,9 @@ def create_emprestimos_livros():
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS emprestimos_livros (
-        emprestimo_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        livro_id INTEGER REFERENCES livro(id),
-        data_devolucao DATE,
+        emprestimo_id INTEGER REFERENCES emprestimos(id) NOT NULL,
+        livro_id INTEGER REFERENCES livros(id) NOT NULL,
+        data_devolucao DATE NOT NULL,
         PRIMARY KEY (emprestimo_id, livro_id)
     )
     """)
